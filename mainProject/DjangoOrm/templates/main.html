@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello {{ firstname }}, how are you?</h1>
+<ul>
+{% for tasks in tasks %}
+    <li>Номер: {{ tasks.id }}|Название: {{ tasks.name }}|Описание задачи: {{ tasks.description }}|Дата создания: {{ tasks.date_created}}</li>
+{% endfor %}
+</ul>
+</body>
+</html>

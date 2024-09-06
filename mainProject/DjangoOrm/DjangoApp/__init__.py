@@ -1,0 +1,1 @@
+# cd D:\PycharmProjects\Diploma\mainProject\DjangoOrm
