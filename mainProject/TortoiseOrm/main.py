@@ -19,7 +19,7 @@ async def main():
     await init()
 @app.get("/main/", response_class=HTMLResponse)
 async def main_page(request: Request, ) -> HTMLResponse:
-    tasks = await Tortoise.init()
+    tasks = await main()
     print(tasks)
     return templates.TemplateResponse(
         request=request, name="main.html", context={"tasks": tasks}
