@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-<h1>TemplateFastAPI</h1>
+<h1>TemplateFastAPITortouse</h1>
+<ul>
+    {% for task in tasks %}
+        <li>Номер: {{ task.id }} | Название: {{ task.name }} | Описание задачи: {{ task.description }} | Дата создания: {{ task.date_created }}</li>
+    {% endfor %}
+</ul>
 </body>
 </html>

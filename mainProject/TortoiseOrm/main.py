@@ -17,12 +17,11 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 async def main():
     await init()
+    return await Task.all()
 @app.get("/main/", response_class=HTMLResponse)
-async def main_page(request: Request, ) -> HTMLResponse:
+async def main_page(request: Request) -> HTMLResponse:
     tasks = await main()
     print(tasks)
-    return templates.TemplateResponse(
-        request=request, name="main.html", context={"tasks": tasks}
-    )
+    return templates.TemplateResponse("main.html", {"request": request, "tasks": tasks})
 if __name__ == '__main__':
     run_async(main())

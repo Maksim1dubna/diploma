@@ -9,6 +9,8 @@ def main_temp(request):
     # )
     # new.save()
     tasks = Task.objects.all()
+    print(tasks)
+    print(type(tasks))
     template = loader.get_template('main.html')
     context = {
         'firstname': 'Linus',

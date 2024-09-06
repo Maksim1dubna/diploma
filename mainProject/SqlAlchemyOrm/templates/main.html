@@ -6,8 +6,10 @@
 </head>
 <body>
 <h1>TemplateFastAPI</h1>
+<ul>
 {% for tasks in tasks %}
     <li>Номер: {{ tasks.id }}|Название: {{ tasks.name }}|Описание задачи: {{ tasks.description }}|Дата создания: {{ tasks.date_created}}</li>
 {% endfor %}
+</ul>
 </body>
 </html>

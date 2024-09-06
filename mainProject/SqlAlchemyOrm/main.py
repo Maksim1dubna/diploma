@@ -16,6 +16,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/main/", response_class=HTMLResponse)
 async def main_page(request: Request) -> HTMLResponse:
     tasks = session.query(Task).all()
+    print(tasks)
     return templates.TemplateResponse(
         request=request, name="main.html", context={"tasks": tasks}
     )
@@ -23,3 +24,6 @@ async def main_page(request: Request) -> HTMLResponse:
 with engine.connect() as conn:
     result = conn.execute(text("select 'hello world'"))
     print(result.all())
+    tasks = session.query(Task).all()
+    print(tasks)
+    print(type(tasks))
