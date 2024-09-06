@@ -11,5 +11,15 @@
     <li>Номер: {{ tasks.id }}|Название: {{ tasks.name }}|Описание задачи: {{ tasks.description }}|Дата создания: {{ tasks.date_created}}</li>
 {% endfor %}
 </ul>
+<form method="post">
+    {% csrf_token %}
+    <label for="id">Введите ID</label>
+    <input type = "number" step="1" id="id" name = "id" min = 1 required>
+    <label for="name">Введите название</label>
+    <input type = "text" id="name" name = "name" maxlength="30">
+    <label for="description">Введите описание</label>
+    <input type = "text" id="description" name = "description" maxlength="8">
+    <button type="submit">Новый/Изменить</button>
+</form>
 </body>
 </html>
