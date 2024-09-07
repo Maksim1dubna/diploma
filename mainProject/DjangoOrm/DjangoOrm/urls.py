@@ -20,5 +20,5 @@ from DjangoApp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('main/', main_temp)
+    path('main/', main_temp),
 ]
