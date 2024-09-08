@@ -5,14 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<h1>TemplateFastAPITortouse</h1>
+<h1>TemplateFastAPI</h1>
 <ul>
-    {% for task in tasks %}
-        <li>Номер: {{ task.id }} | Название: {{ task.name }} | Описание задачи: {{ task.description }} | Дата создания: {{ task.date_created }}</li>
-    {% endfor %}
+{% for tasks in tasks %}
+    <li>Номер: {{ tasks.id }}|Название: {{ tasks.name }}|Описание задачи: {{ tasks.description }}|Дата создания: {{ tasks.date_created}}</li>
+{% endfor %}
 </ul>
 <h1>{{ error }}</h1>
-<form method="POST">
+<form method="post" action="/main/create_update">
     <label for="id_cu">Введите ID</label>
     <input type = "number" step="1" id="id_cu" name = "id_cu" min = 1 required>
     <label for="name">Введите название</label>
@@ -21,7 +21,7 @@
     <input type = "text" id="description" name = "description" maxlength="30">
     <button type="submit">Новый/Изменить</button>
 </form>
-<form method="POST">
+<form method="post" action="/main/delete">
     <label for="id_d">Введите ID на удаление</label>
     <input type = "number" step="1" id="id_d" name = "id_d" min = 1 required>
     <button type="submit">Удалить по ID</button>
