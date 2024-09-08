@@ -1,6 +1,7 @@
 # django-admin startproject UrbanDjango
 # cd DjangoApp
 # python manage.py runserver
+# python -m uvicorn main:app
 # python manage.py startapp task1
 # python manage.py startapp example2
 # python manage.py startapp example3
@@ -13,3 +14,4 @@ tortoise-orm
 fastapi
 uvicorn
 jinja2
+python-multipart
