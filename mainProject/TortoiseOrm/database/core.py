@@ -1,5 +1,4 @@
-from tortoise import Tortoise, run_async
-from database.models import *
+from tortoise import Tortoise
 async def init():
     tortoise_config = {
         'connections': {
@@ -20,17 +19,3 @@ async def init():
         modules={'models': ['__main__']},
     )
     await Tortoise.generate_schemas()
-
-
-
-    # tortoise_config = {
-    #     "connections": {"default": "sqlite://taskdata.db"},
-    #     "apps": {
-    #         "pnwapi": {
-    #             "models": ["database.models"],
-    #             "default_connection": "default",
-    #         }
-    #     },
-    #     "use_tz": False,
-    #     "timezone": "UTC",
-    # }

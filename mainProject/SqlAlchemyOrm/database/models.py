@@ -1,10 +1,7 @@
 from datetime import datetime
-
-from sqlalchemy import create_engine, ForeignKey, Column, Integer, DateTime, CHAR, String
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Integer, DateTime, CHAR, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, MappedAsDataclass, mapped_column
 from sqlalchemy.sql import func
-
 class BaseClass(DeclarativeBase):
     pass
 class Task(MappedAsDataclass, BaseClass):

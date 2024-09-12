@@ -1,13 +1,11 @@
 from database.core import *
-from sqlalchemy import text, select, update, delete
+from sqlalchemy import select
 # cd D:\PycharmProjects\Diploma\mainProject\SqlAlchemyOrm
 #Для запуска python -m uvicorn main:app
 # Swagger /docs
-from fastapi import FastAPI, HTTPException, Request, Form
+from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
-from typing import List
 from database.models import Task
 
 app = FastAPI()
@@ -16,7 +14,6 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/main/", response_class=HTMLResponse)
 async def main_page(request: Request) -> HTMLResponse:
     tasks = session.query(Task).all()
-    print(tasks)
     return templates.TemplateResponse(
         request=request, name="main.html", context={"tasks": tasks}
     )
@@ -26,8 +23,8 @@ def new_create_update(request: Request, id_cu: int = Form(...), name: str = Form
     query = select(Task.id)
     list_id = session.scalars(query).all()
     if id_cu in list_id:
-        u = update(Task).values({"name":name, "description":description}).where(Task.id==id_cu)
-        session.execute(u)
+        session.query(Task).filter(Task.id==id_cu).update({"name":name, "description":description})
+        session.commit()
         error = f"Задание {id_cu} ОБНОВЛЕНО"
         tasks = session.query(Task).all()
         return templates.TemplateResponse(
@@ -36,7 +33,6 @@ def new_create_update(request: Request, id_cu: int = Form(...), name: str = Form
         newTask = Task(id=id_cu,
                          name=name,
                          description=description)
-
         session.add(newTask)
         session.commit()
         error = f"Задание {id_cu} СОЗДАНО"
@@ -51,21 +47,18 @@ def delete(request: Request, id_d: int = Form(...)):
     error = ""
     query = select(Task.id)
     list_id = session.scalars(query).all()
-    print(list_id)
     if id_d in list_id:
         session.query(Task).filter(Task.id == id_d).delete()
         session.commit()
         error = f"Задание {id_d} УДАЛЕНО"
+        tasks = session.query(Task).all()
         return templates.TemplateResponse(
             request=request, name="main.html", context={"tasks": tasks, "error": error})
     else:
         error = f"Задание {id_d} НЕ СУЩЕСТВУЕТ"
+        tasks = session.query(Task).all()
         return templates.TemplateResponse(
             request=request, name="main.html", context={"tasks": tasks, "error": error})
     return templates.TemplateResponse(
         request=request, name="main.html", context={"tasks": tasks, "error":error}
     )
-
-with engine.connect() as conn:
-    result = conn.execute(text("select 'hello world'"))
-    tasks = session.query(Task).all()
