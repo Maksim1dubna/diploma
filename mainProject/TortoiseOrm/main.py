@@ -1,4 +1,3 @@
-import tortoise.queryset
 from tortoise import run_async
 from database.core import *
 #cd D:\PycharmProjects\Diploma\mainProject\TortoiseOrm
@@ -8,11 +7,8 @@ from fastapi import FastAPI, HTTPException, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from database.core import *
-from pydantic import BaseModel
-from typing import List
 from database.models import Task
-# import nest_asyncio
-# nest_asyncio.apply()
+import time
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 async def main():

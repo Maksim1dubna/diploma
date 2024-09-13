@@ -3,7 +3,7 @@ from django.template import loader
 from DjangoApp.models import Task
 # Create your views here.
 from django import forms
-
+import time
 class AddNewUpdate(forms.Form):
     id_cu = forms.IntegerField(label="Введите ID", required=True)
     name = forms.CharField(max_length=30, required=False, label="Введите название")
@@ -12,7 +12,11 @@ class DeleteByid(forms.Form):
     id_d = forms.IntegerField(label="Введите ID на удаление", required=True)
 def main_temp(request):
     error = ''
+    start = time.monotonic_ns()
     tasks = Task.objects.all()
+    finish = time.monotonic_ns()
+    execution_time = start - finish
+    print(f"\n\n\n{tasks}///Время выполнения команды:{execution_time}\n\n\n")
     template = loader.get_template('main.html')
     context = {
         'tasks': tasks,
