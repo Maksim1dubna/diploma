@@ -1,3 +1,5 @@
+from datetime import time
+
 from database.core import *
 from sqlalchemy import select
 # cd D:\PycharmProjects\Diploma\mainProject\SqlAlchemyOrm
@@ -7,7 +9,7 @@ from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from database.models import Task
-import time
+import pytz
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -32,8 +34,8 @@ def new_create_update(request: Request, id_cu: int = Form(...), name: str = Form
             request=request, name="main.html", context={"tasks": tasks, "error": error})
     else:
         newTask = Task(id=id_cu,
-                         name=name,
-                         description=description)
+                       name=name,
+                       description=description)
         session.add(newTask)
         session.commit()
         error = f"Задание {id_cu} СОЗДАНО"
